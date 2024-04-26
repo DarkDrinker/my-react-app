@@ -8,6 +8,8 @@ import { males, females } from "./file2";
 
 
 function App() {
+
+  
   const {firstName, email} = obj;
   let text1test = text1;
   let text2test = text2;
@@ -17,6 +19,7 @@ function App() {
   arr2.push("Helle", "Tina");
   return (
     <>
+    <h1>Exercises 0</h1>
     <h2>ex 1</h2>
     <p>{upper(text1test)}</p>
     <p>{upper(text2test)}</p>
@@ -27,6 +30,9 @@ function App() {
     <p>{arr}</p>
     <p>{arr2}</p>
 
+
+    <h1>Exercises 1</h1>
+    
 
 
 
