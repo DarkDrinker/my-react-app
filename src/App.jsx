@@ -5,6 +5,8 @@ import './App.css'
 import upper, {text1,text2, text3} from "./file1";
 import obj from "./file2";
 import { males, females } from "./file2";
+import { Welcome, MultiWelcome } from "./file3";
+import JokeComponent from './Jokefunctions';
 
 
 function App() {
@@ -32,9 +34,10 @@ function App() {
 
 
     <h1>Exercises 1</h1>
-    
+    <h2>ex 1(props1)</h2>
+    <h2><MultiWelcome></MultiWelcome></h2>
 
-
+    <button onClick={JokeComponent}> Click me for a joke</button>
 
 
 
