@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -7,6 +7,7 @@ import obj from "./file2";
 import { males, females } from "./file2";
 import { Welcome, MultiWelcome } from "./file3";
 import JokeComponent from './Jokefunctions';
+import SvgComponent from './assets/SvgComponent';
 
 
 function App() {
@@ -19,6 +20,43 @@ function App() {
   const arr = [...males, ...females];
   const arr2 = [...arr]
   arr2.push("Helle", "Tina");
+
+  const [prevClickedElement, setPrevClickedElement] = useState(null);
+  const [toRender, setToRender ] = useState(SvgComponent)
+  const [countryName, setSelectedCountry] = useState('');
+
+  const handleSVGClick = (event) => { 
+  const clickedElement = event.target;
+  if (prevClickedElement) {
+    prevClickedElement.style.fill = "silver";
+  }
+  clickedElement.style.fill = "red";
+  setPrevClickedElement(clickedElement);
+  console.log(clickedElement.attributes.id.value);
+  countryName = clickHandler(clickedElement.attributes.id.value)
+  console.log(countryName);
+}
+
+
+const clickHandler = (countrycode) => {
+  // State to store the joke
+  const [countryName, setSelectedCountry] = useState('');
+  // useEffect to fetch the joke
+  useEffect(() => {
+      fetch('https://restcountries.com/v3.1/alpha/'+ countrycode)
+          .then(response => response.json())
+          .then(data => {
+            if(data){
+              console.log(data[0].name.common);
+              setSelectedCountry(data[0].name.common)
+            
+            }
+          })
+          .catch(error => console.error('Error fetching joke:', error));
+  }, [countryName]); // Empty dependency array means this runs once on mount
+  
+}
+ 
   return (
     <>
     <h1>Exercises 0</h1>
@@ -37,9 +75,13 @@ function App() {
     <h2>ex 1(props1)</h2>
     <h2><MultiWelcome></MultiWelcome></h2>
 
-    <button onClick={JokeComponent}> Click me for a joke</button>
+    <button onClick> Click me for a joke</button>
+    {JokeComponent()}
 
-
+    <div id='map'>
+        <SvgComponent onClick={handleSVGClick}/>
+        <p></p>
+    </div>
 
 
     </>
